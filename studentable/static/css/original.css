@@ -1,0 +1,214 @@
+.bg-1 { 
+    background-color: #FFFFFF; /* Grey */
+    color: #ffffff;
+}
+
+.bg-2 { 
+    background-color: #333333; /* Dark grey */
+    color: #ffffff;
+    font-family: Century Gothic;
+}
+
+
+#red-part {
+	color:#F13E41;
+	display: inline;
+}
+
+#print-glyph{
+	position: relative;
+	float: right;
+}
+
+#about-page-text{
+	font-family: Century Gothic, sans-serif;
+	color: #333333;
+	font-size: 15px;
+
+
+}
+
+/*trying to create a speicif print area with the class below */
+.noprint{
+	...
+}
+/* setting noprint display to NONE in print preview */
+@media print
+{
+.noprint{display:none;}
+}
+
+@media screen
+{
+...
+}
+
+div ul li:hover {
+	 background-color:#474e5d; /*dark blue*/
+	 color:#ffffff;	 
+ }
+
+tbody tr td:hover {
+ 	background-color: ##FFFFFF; /*light grey*/
+ 	
+ }
+ 
+td a{
+ 	color: #474e5d;
+ }
+td a:hover {
+ 	/*Changes the displayed levels hover color to light green*/
+	 color: #1abc9c !important; /*green*/ 
+	 text-decoration-style: none;
+
+
+ }
+	 
+div div div button:hover {
+	background-color: #474e5d !important
+}
+	
+#footer {
+	width: 100%;
+	background-color:#474e5d;
+	height: 30px;
+	font-family: Century Gothic;
+}
+
+#default-bg {
+	background-color: #F0EBEB;
+	font-family: Century Gothic;
+	font-size: 15px;
+	color: #474e5d; /*dark blue*/
+}
+
+.level {
+	text-align: center;
+	font-size: 45px;
+	color: #ffffff;
+}
+
+.courses-list{
+
+	text-align: left;
+	font-size: 15px;
+	color: #ffffff;
+
+}
+
+.table-elements {
+	font-size: 15px;
+	font-family: Verdana;
+	align-self: center;
+	text-align: right;
+}
+
+#table-headers {
+	text-align: centre;
+
+}
+
+#monday-column {
+	background-color: #1abc9c !important; /*green*/
+	text-align: center;
+	
+}
+
+#tuesday-column {
+	background-color: #ffb5c5;  /*pale pink*/
+	text-align: center;
+
+}
+
+#wednesday-column{
+	background-color: #8470ff; /*light slate blue*/
+	text-align: center;
+}
+
+#thursday-column {
+	background-color: #ee7621; /*chocolate*/
+	text-align: center;
+}
+
+#friday-column {
+	background-color: #7d9ec0; /*light yellow*/
+	text-align: center;
+}
+
+/* Footer CSS courtsey of http://tutorialzine.com/2015/01/freebie-5-responsive-footer-templates/ */
+
+.footer-distributed{
+	background-color: #333333;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+	box-sizing: border-box;
+	width: 100%;
+	text-align: left;
+	font: normal 16px sans-serif;
+
+	padding: 45px 50px;
+	margin-top: 80px;
+}
+
+
+.footer-distributed .footer-left p{
+	color:  #8f9296;
+	font-size: 14px;
+	margin: 0;
+}
+
+/* Footer links */
+
+.footer-distributed p.footer-links{
+	font-size:18px;
+	font-weight: bold;
+	color:  #ffffff;
+	margin: 0 0 10px;
+	padding: 0;
+}
+
+.footer-distributed p.footer-links a{
+	display:inline-block;
+	line-height: 1.8;
+	text-decoration: none;
+	color:  inherit;
+}
+
+.footer-distributed .footer-right{
+	float: right;
+	margin-top: 6px;
+	max-width: 180px;
+}
+
+.footer-distributed .footer-right a{
+	display: inline-block;
+	width: 35px;
+	height: 35px;
+	background-color:  #33383b;
+	border-radius: 2px;
+
+	font-size: 20px;
+	color: #ffffff;
+	text-align: center;
+	line-height: 35px;
+
+	margin-left: 3px;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+@media (max-width: 600px) {
+
+	.footer-distributed .footer-left,
+	.footer-distributed .footer-right{
+		text-align: center;
+	}
+
+	.footer-distributed .footer-right{
+		float: none;
+		margin: 0 auto 20px;
+	}
+
+	.footer-distributed .footer-left p.footer-links{
+		line-height: 1.8;
+	}
+}

@@ -1,0 +1,32 @@
+{% extends 'studentable/base.html' %}
+
+{% block main %}
+
+
+<h3><caption> Enter your course codes. </caption></h3>
+<form method="POST">
+	{% csrf_token %}
+	<br><label>Course code: </label><input type="text" name="code" id="textbox1"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox2"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox3"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+	<br><label>Course code: </label><input type="text" name="code" id="textbox4"/>
+
+	<span id="response"></span>
+	<input type="button" value="Add a course" class="btn btn-success" onclick="add_course_code()"/>	
+	<button type="submit" class="btn btn-danger" value="Go!">Submit</button>
+</form>
+{% endblock %}
+
+
+{% block sub %}
+
+{% endblock %}

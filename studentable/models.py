@@ -5,11 +5,11 @@ from django.utils import timezone
 
 class Course(models.Model):
 	code = models.CharField(max_length=6)
-	mon = models.CharField(max_length=12)
-	tue = models.CharField(max_length=12)
-	wed = models.CharField(max_length=12)
-	thu = models.CharField(max_length=12)
-	fri = models.CharField(max_length=12)
+	mon = models.CharField(max_length=12, default=' ')
+	tue = models.CharField(max_length=12, default=' ')
+	wed = models.CharField(max_length=12, default=' ')
+	thu = models.CharField(max_length=12, default=' ')
+	fri = models.CharField(max_length=12, default=' ')
 
 	def __str__(self):
-		return self.code
+		return self.code.upper()

@@ -1,0 +1,55 @@
+{% extends "studentable/base.html" %}
+
+
+{% block main %}
+  <div id="print-glyph" >
+    <a href="javascript:window.print()"><span class="glyphicon glyphicon-print"></a>Print</span>
+  </div>
+  {% if courses %}
+    <table class='table table-striped table-bordered '>
+        <thead class="thead-inverse">
+            <tr>
+                <td id="table-headers">Course</td>
+                <td id="table-headers">Monday</td>
+                <td id="table-headers">Tuesday</td>
+                <td id="table-headers">Wednesday</td>
+                <td id="table-headers">Thursday</td>
+                <td id="table-headers">Friday</td>
+            </tr>
+        </thead>
+    <h4> My Course Schedule</h4>
+      
+    {% for course in courses %} 
+      <tr>
+        <td>{{ course }}</td>
+        <td id="monday-column">{{ course.mon }}</td>
+        <td id="tuesday-column">{{ course.tue }}</td>
+        <td id="wednesday-column">{{ course.wed }}</td>
+        <td id="thursday-column">{{ course.thu }}</td>
+        <td id="friday-column">{{ course.fri }}</td>
+      </tr>     
+    {% endfor %}
+    </table>
+  {% else %}
+    <tr>
+      <td> No courses found </td>
+    </tr>
+  
+  {% endif %}
+{% endblock %}
+
+{% block morecontent %}
+  <br>
+  {% if clashes %}
+    <h4><u>Oops, looks like some course times are clashing:</u></h4>
+      {% for key, value in clashes.items %}
+        <em>{{ key }}: {{ value.0.0 }}</em>
+        {% for course in value.0.1 %}
+          <li>{{ course }}</li>
+        {% endfor %}
+        <br>
+    {% endfor %}    
+  {% else %}
+    <h3>You have no clashing courses.</h3>  
+  {% endif %}
+{% endblock %}
