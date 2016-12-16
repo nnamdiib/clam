@@ -37,61 +37,98 @@ def showTimetable(request, code_list):
 # ***********
 
 def get_schedule_conflicts(course_objects):
-  # Gets all courses with time clashes for each day. 
-  # returns this data struct ---> { 'monday': [ ('1-2 PM', [courses] ), 'tuesday': ... ]}
-  mon_times = {}
-  tue_times = {}
-  wed_times = {}
-  thu_times = {}
-  fri_times = {}
+  # Gets all courses with scheduling conflicts for each day. 
+  monday = []
+  tuesday = []
+  wednesday = []
+  thursday = []
+  friday = []
 
-  # get a dict with key-value pairs of class times(key) and a list of course codes(val).
-  for course in course_objects:
-    if course.mon:
-      if len(course.mon.split(', ')) > 1:
-        for t in course.mon.split(', '):
-          mon_times.setdefault(t, []).append(course.__str__())
-      else:
-        mon_times.setdefault(course.mon, []).append(course.__str__())
-    if course.tue:
-      if len(course.tue.split(', ')) > 1:
-        for t in course.tue.split(', '):
-          tue_times.setdefault(t, []).append(course.__str__())
-      else:
-        tue_times.setdefault(course.tue, []).append(course.__str__())
-    if course.wed:
-      if len(course.wed.split(', ')) > 1:
-        for t in course.wed.split(', '):
-          wed_times.setdefault(t, []).append(course.__str__())
-      else:
-        wed_times.setdefault(course.wed, []).append(course.__str__())
-    if course.thu:
-      if len(course.thu.split(', ')) > 1:
-        for t in course.thu.split(', '):
-          thu_times.setdefault(t, []).append(course.__str__())
-      else:
-        thu_times.setdefault(course.thu, []).append(course.__str__())
-    if course.fri:
-      if len(course.fri.split(', ')) > 1:
-        for t in course.fri.split(', '):
-          fri_times.setdefault(t, []).append(course.__str__())
-      else:
-        fri_times.setdefault(course.fri, []).append(course.__str__())
+  mon_courses = [course for course in course_objects if course.mon != ' ']
+  mon_clashes = []
+  for course in mon_courses:
+    existing = [(int(c.mon[:2]) + int(c.mon[5:7]), c) for c in mon_courses if c != course]
+    present = int(course.mon[:2]) + int(course.mon[5:7])
+    clash = []
+    for s in existing:
+      if (s[0] == present) or (s[0] == present-1) or (s[0] == present+1):
+        mon_clashes.append((course.code, s[1].code))
+  m = sort_list_of_tups(mon_clashes)
+  for tup in m:
+    if tup not in monday:
+      monday.append(tup)
 
-  times = {
-            "Monday":mon_times,
-            "Tuesday":tue_times,
-            "Wednesday":wed_times,
-            "Thursday":thu_times,
-            "Friday":fri_times
-          }
+  tue = [course for course in course_objects if course.tue != ' ']
+  tue_clashes = []
+  for course in tue:
+    existing = [(int(c.tue[:2]) + int(c.tue[5:7]), c) for c in tue if c != course]
+    present = int(course.tue[:2]) + int(course.tue[5:7])
+    clash = []
+    for s in existing:
+      if (s[0] == present) or (s[0] == present-1) or (s[0] == present+1):
+        tue_clashes.append((course.code, s[1].code))
+  m = sort_list_of_tups(tue_clashes)
+  for tup in m:
+    if tup not in tuesday:
+      tuesday.append(tup)
 
-  clash_dict = {}
 
-  for day in times:
-    for (time, courses) in times[day].items():
-      if len(courses) > 1 and time != ' ':
-        clash_dict.setdefault(day, []).append((time, courses))
+  wed = [course for course in course_objects if course.wed != ' ']
+  wed_clashes = []
+  for course in wed:
+    existing = [(int(c.wed[:2]) + int(c.wed[5:7]), c) for c in wed if c != course]
+    present = int(course.wed[:2]) + int(course.wed[5:7])
+    clash = []
+    for s in existing:
+      if (s[0] == present) or (s[0] == present-1) or (s[0] == present+1):
+        wed_clashes.append((course.code, s[1].code))
+  m = sort_list_of_tups(wed_clashes)
+  for tup in m:
+    if tup not in wednesday:
+      wednesday.append(tup)
 
-  return clash_dict
 
+  thu = [course for course in course_objects if course.thu != ' ']
+  thu_clashes = []
+  for course in thu:
+    existing = [(int(c.thu[:2]) + int(c.thu[5:7]), c) for c in thu if c != course]
+    present = int(course.thu[:2]) + int(course.thu[5:7])
+    clash = []
+    for s in existing:
+      if (s[0] == present) or (s[0] == present-1) or (s[0] == present+1):
+        thu_clashes.append((course.code, s[1].code))
+  m = sort_list_of_tups(thu_clashes)
+  for tup in m:
+    if tup not in thursday:
+      thursday.append(tup)
+
+
+  fri = [course for course in course_objects if course.fri != ' ']
+  fri_clashes = []
+  for course in fri:
+    existing = [(int(c.fri[:2]) + int(c.fri[5:7]), c) for c in fri if c != course]
+    present = int(course.fri[:2]) + int(course.fri[5:7])
+    clash = []
+    for s in existing:
+      if (s[0] == present) or (s[0] == present-1) or (s[0] == present+1):
+        fri_clashes.append((course.code, s[1].code))
+  m = sort_list_of_tups(fri_clashes)
+  for tup in m:
+    if tup not in friday:
+      friday.append(tup)
+
+  if monday or tuesday or wednesday or thursday or friday:
+    clashesDict = {'monday':monday,
+                   'tuesday':tuesday,
+                   'wednesday':wednesday,
+                   'thursday':thursday,
+                   'friday':friday
+                  }
+  else:
+    clashesDict = None
+
+  return clashesDict
+
+
+def sort_list_of_tups(lot):
+  return [sorted(tup) for tup in lot]

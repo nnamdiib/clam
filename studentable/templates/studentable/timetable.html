@@ -43,9 +43,11 @@
   {% if clashes %}
     <h4><u>Oops, looks like some course times are clashing:</u></h4>
       {% for key, value in clashes.items %}
-        <em>{{ key }}: {{ value.0.0 }}</em>
-        {% for course in value.0.1 %}
-          <li>{{ course }}</li>
+        <em>{{ key }}:</em>
+        {% for courseList in value %}
+            {% for course in courseList %}
+              <li>{{ course }}</li>
+            {% endfor %}
         {% endfor %}
         <br>
     {% endfor %}    
